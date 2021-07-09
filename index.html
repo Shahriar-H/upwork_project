@@ -135,8 +135,14 @@
                 <span class="rate"></span>
                 <span class="tokenSymbol">BEETH</span>
             </p>
-            <p class="calculation">BNB <input type="number" id="buyAmount" value="0" min="0"><button id="buyBtn" style="text-align: center">Buy</button></p>
+            <p class="calculation">BNB <input onchange="getinputv()" type="number" id="buyAmount" value="0" min="0"><button id="buyBtn" style="text-align: center">Buy</button></p>
             <p class="you_get">You get:<span id="get"> 0</span><span class="tokenSymbol"> BEETH</span></p>
+            <script>
+                function getinputv(){
+                    var v = document.getElementById('buyAmount').value;
+                    document.getElementById('get').innerHTML=v;
+                }
+            </script>
             <p>
             </p>
             <p>You have contributed<span id="mySpendings">?</span>of<span class="max">?</span>BNB maximum purchase limit,can spend max.<span id="myRemaining">?</span>BNB more</p>
