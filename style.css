@@ -188,6 +188,7 @@ input {
     display: inline-block;
     margin-bottom: 0;
     background-color: rgba(173, 173, 173, 0.705);
+    word-break: break-all;
 }
 .copybtn{
     margin-top: 5px;
@@ -257,6 +258,9 @@ input {
 .calculation{
     margin-bottom: 0;
     margin-top: 14px;
+}
+.calculation input{
+    color: black;
 }
 .you_get{
     margin-top: 0;
@@ -336,6 +340,7 @@ progress{
     background-color: rgb(177, 177, 177);
     padding: 3px;
     border: 1px solid grey;
+    word-break: break-all;
 }
 footer{
     background-color: rgb(0, 119, 255);
