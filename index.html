@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="Token sale page">
+
+
+        <title>Token sale</title>
+        <link rel="stylesheet" href="./style.css">
+
+        <script>
+
+            var test = false; // False if contracts are on Mainnet
+
+            var contractAddressSale = '0x1Ee9Eb8EE56D854C8E6F56fC1c5A8A58d3D79a4c';
+
+            var contractAddressToken = '0xb32AFe1108CaE2BF885C9f841b09bADe6337591a';
+        </script>
+
+
+    </head>
+
+
+    <body>
+
+    <div class="sec1">
+        <div style="text-align: center">
+
+            <div class="btndiv">
+                <button id="connect" style="font-size: 12px">Connect</button>
+                <button class="switch" id="addMainBSC" style="font-size: 12px;">To BSC Mainnet</button>
+            </div>
+
+
+            <span id="nometamask" class="err" style="display: none">Please install Metamask first...</span>
+
+            <div class="network small">
+                <span id="curnet">
+                    <span class="err">Please use DApp browser/extension (e.g.
+                        <a target="_blank" href="https://metamask.io">Metamask</a>)</span>
+                </span>
+                <span id="myAddr"></span>
+
+                <span id="referred" style="display:none"><br>Referrer:
+                    <span id="referrer"></span>
+                </span>
+            </div>
+
+        </div>
+        <br><br>
+
+        <div style="text-align: center">
+
+            <h1 class="token_info">Token info</h1>
+
+            <h2 class="beethoven">
+                <span id="tokenName">BEETHOVEN FINANCE</span>
+                (<span class="tokenSymbol">BEETH</span>)
+            </h2>
+
+            <p class="code">
+                <a target="_blank" href="https://bscscan.com/token/0xb32AFe1108CaE2BF885C9f841b09bADe6337591a" id="tokenAddress">0xb32AFe1108CaE2BF885C9f841b09bADe6337591a</a>
+            </p>
+
+            <!-- Reserved in case you want to show decimals and total supply: Decimals <span id="#tokenDecimals"></span> Total supply <span id="#tokenSupply"></span>-->
+
+            <p class="copybtn">
+                <button id="addToken"  style="text-align: center">Add to Metamask</button>
+                <button id="copyToken" class="addToken" style="text-align: center">Copy address</button>
+            </p>
+
+        </div>
+    </div>
+
+<!-- end first section -->
+
+
+    <div class="section2">
+        <div style="text-align: center; color: black;">
+
+            <h1 class="token_sells">Token sale status</h1>
+
+            <h1>
+
+                <span id="finished" style="display:none" class="status green">Finished</span>
+
+                <span id="unlocked" style="display:none" class="status green"><br>Claim unlocked</span>
+
+                <span id="locked" style="display:none" class="status err"><br>Claim locked</span>
+
+                <span id="addtokens" style="display:none" class="status err"><br>Ask token sale admin to add tokens to the sale contract!</span>
+
+                <span id="active" style="display:none" class="status green">Active</span>
+
+                <span id="paused" style="display:none" class="status err">Paused</span>
+
+                <span id="upcoming" style="display:none" class="status blue">Upcoming</span>
+
+                <span id="upcomingtimer" style="display:none" class="status blue"><br>begins in
+                    <span id="starttimer"></span>
+                </span>
+
+                <span id="activetimer" style="display:none" class="status green"><br>ends in
+                    <span id="endtimer"></span>
+                </span>
+
+            </h1>
+
+            <p class="progbar"><progress id="progress" value="0" max="100" style="width: 70%">
+            </p>
+        </progress>
+
+        <div class="infohere" style="color: black;">
+
+            <p>Raised:<span id="raised"></span>of<span class="hardcap"></span>BNB</p>
+            <p>Tokens sold:<span id="sold"></span>of<span class="saleqty"></span><span class="tokenSymbol">BEETH</span></p>
+            <p>Remaining:<span id="toraise"></span>BNB (~<span id="unsold"></span><span class="tokenSymbol">BEETH</span>)</p>
+        
+        </div>
+
+  
+    
+        <hr>
+        <div style="text-align: center">
+            <h1 class="buy_tocken">Buy tokens</h1>
+            <p class="bnbtobeeth">1 BNB =
+                <span class="rate"></span>
+                <span class="tokenSymbol">BEETH</span>
+            </p>
+            <p class="calculation">BNB <input type="number" id="buyAmount" value="0" min="0"><button id="buyBtn" style="text-align: center">Buy</button></p>
+            <p class="you_get">You get:<span id="get"> 0</span><span class="tokenSymbol"> BEETH</span></p>
+            <p>
+            </p>
+            <p>You have contributed<span id="mySpendings">?</span>of<span class="max">?</span>BNB maximum purchase limit,can spend max.<span id="myRemaining">?</span>BNB more</p>
+        </div>
+    </div>
+    </div>
+
+
+<!-- end second section -->
+    <div class="sec3">
+        <div class="token_sells_info" style="text-align: left">
+            <h1>Token sale information</h1>
+            <p>Hardcap:<span class="hardcap"></span>BNB (~<span class="saleqty"></span><span class="tokenSymbol">BEETH</span>)</p>
+            <p>Rate: 1 BNB =<span class="rate"></span><span class="tokenSymbol">BEETH</span>(~<span class="price"></span>BNB/<span class="tokenSymbol">BEETH</span>)</p>
+            <p>Purchase limit:<span class="max"></span></p>
+            <p>Start:<span id="start"></span></p>
+            <p>End:<span id="end"></span></p>
+            <p>Duration:<span id="duration"></span></p>
+            <p>Tokens claim:
+                <span id="claimtime"></span>
+                <span id="canhcdelay" style="display:none" class="claimstatus">Can be claimed after hardcap is reached +
+                <span id="canhcdelayh"></span>
+                </span>
+                <span id="canhc" style="display:none" class="claimstatus">Can be claimed immediately after hardcap is
+                reached</span>
+                <span id="cannothc" style="display:none" class="claimstatus">Can be claimed only when unlock time comes</span>
+            </p>
+        </div>
+
+        <div class="div_mytoken" style="text-align: left">
+            <h1 class="mytokens">My tokens</h1>
+            <p>In my wallet:<span id="myTokens"></span></p>
+            <p>Unclaimed:<span id="myUnclaimed"></span></p>
+            <div id="claimstatus">
+                <span id="claimok" style="display:none" class="claimstatus green">Tokens are unlocked and can be claimed</span>
+                <span id="claimnotok" style="display:none" class="claimstatus err">Tokens are locked</span>
+            </div>
+            <p><button class="climebutton" id="claim">Claim my tokens</button></p>
+        </div>
+    </div>
+
+<!-- section 4 end -->
+
+    <div class="sec4">
+        <div style="text-align: center">
+            <h1>Sale contract</h1>
+            <p>You can also buy tokens by sending BNB directly from your wallet to this contract<br>
+                (please increase gas limit to 200,000 or even more for tokens with special functions like autoLP, swaps, etc.)
+            </p>
+            <p style="margin-bottom: 10px;">
+                <a class="dislink" href="https://bscscan.com/address/0x1Ee9Eb8EE56D854C8E6F56fC1c5A8A58d3D79a4c" target="_blank"
+                id="saleAddress">0x1Ee9Eb8EE56D854C8E6F56fC1c5A8A58d3D79a4c</a>
+                <button class="copySale" id="copySale" style="text-align: center">Copy address</button>
+            </p>
+            <div style="text-align: center" id="saleqr"></div>
+        </div>
+        <br>
+        <div style="text-align: center">
+            <h1>Referral program</h1>
+            <p>Share your referral link and get paid instantly to your wallet for every referred token purchase.</p>
+            <p>Total paid to referrers:<span id="refTotal"></span>BNB</p>
+            <p>Referral commission:<span id="refPercent">10</span>%</p>
+            <p>Your referral earnings:<span id="refMy"></span>BNB</p>
+            <p>Share your referral link or QR code and get commission for referred token purchases instantly to your wallet.</p>
+            <p class="copyinput"><input type="text" id="referLink" size="70" readonly="true"><button class="copySale" id="copyreflink">Copy link</button></p>
+            <div id="refqrcode">
+                <div style="text-align: center" id="refqr"></div>
+            </div>
+            <p id="refErr" class="err" style="display: none">Please connect your wallet on Binance Smart Chain to generate your referral link!</p>
+        </div>
+    </div>
+    <footer>
+        <p>© BEETHOVEN FINANCE</p>
+    </footer>
+        <script src='https://dappbuilder.org/js/jquery-3.6.0.min.js' type="text/javascript" charset="utf-8"></script>
+        <script src='https://dappbuilder.org/js/ethers-5.0.umd.min.js' type="text/javascript" charset="utf-8"></script>
+        <script src='https://dappbuilder.org/bsc/tokensaleclaimtimeref/js/tokensale.ui.js' type="text/javascript"
+            charset="utf-8"></script>
+        </body>
+        
+        </html>
